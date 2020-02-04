@@ -21,11 +21,12 @@ function detectShake({ shakeTimes, capture }) {
         let speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
 
         if ( speed > THRESHOLD ) {
-          if ((shakeTimes - 1) === shakesQuantity) {
+          if (shakeTimeout) clearTimeout(shakeTimeout)
+          if (shakesQuantity >= (shakeTimes - 1)) {
             capture()
+            shakesQuantity = 0
           } else {
             shakesQuantity += 1
-            if (shakeTimeout) clearTimeout(shakeTimeout)
             shakeTimeout = setTimeout(() => (shakesQuantity = 0), 1000)
           }
         }
