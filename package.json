@@ -1,7 +1,7 @@
 {
   "name": "expo-shaker",
   "title": "Expo Shaker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Shaker is the simplest way to users give feedback into your react-native aplication.",
   "main": "index.js",
   "scripts": {
