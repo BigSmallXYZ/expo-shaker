@@ -2,7 +2,24 @@ import Shaker from './react-native-shaker-component'
 
 import { Accelerometer } from 'expo-sensors'
 
+import { captureScreen } from 'react-native-view-shot'
+
+import * as Device from 'expo-device'
+
 const THRESHOLD = 200
+
+async function takeScreenshot () {
+  return {
+    uri: await captureScreen({
+      format: "jpg",
+      quality: 0.8
+    }),
+    manufacturer: Device.manufacturer,
+    model: Device.modelName,
+    positionScreenX: 0,
+    positionScreenY: 0
+  }
+}
 
 function detectShake({ shakeTimes, capture }) {
   let shakesQuantity = 0
@@ -40,6 +57,7 @@ function detectShake({ shakeTimes, capture }) {
 export default function ShakerExtended (component, params) {
   return Shaker(component, {
     ...params,
-    detectShakeFn: detectShake
+    detectShakeFn: detectShake,
+    takeScreenshot
   })
 }
